@@ -21,7 +21,9 @@ def move(directions):
     with open('example_response.json', 'w') as file:
         file.write(response.text)
     response = response.json()
-    return response["errors"], response["fences"], response["snakes"], response["snakes"], response["enemies"], response["food"], response["specialFood"]
+    return (response["errors"], response["fences"], response["snakes"], 
+    response["snakes"], response["enemies"], response["food"], 
+    response["specialFood"], response["tickRemainMs"])
 
 
 
