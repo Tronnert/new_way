@@ -6,18 +6,22 @@ from math import abs, sign
 def get_world():
     return move([[0, 0, 0], [0, 0, 0], [0, 0, 0]], ["", "", ""])
 
-def get_direction_to_best(position, mandarines):
-    return position - max(mandarines, key=lambda x: x["points"] / (position - x["c"]).sum(), default={"c": np.array([1, 0, 0])})["c"]
+def get_best_food(position, mandarines):
+    return max(mandarines, key=lambda x: x["points"] / (position - x["c"]).sum(), default={"c": np.array([1, 0, 0])})["c"]
 
 def calc(errors, fences, snakes, enemies, food, specialFood):
     # directions = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     new_directions = []
+    print("!calc")
     for snake in snakes:
         if snake["status"] != "dead":
             head_position = np.array(snake["geometry"][0])
             # print(head_position)
-            direction_to_best = get_direction_to_best(head_position, food)
+            best_food = get_best_food(head_position, food)
+            print(best_food, end=" ")
+            print((head_position - best_food).sum())
+            direction_to_best = head_position - best_food
             # print(direction_to_best)
             if abs(direction_to_best[0]) >= abs(direction_to_best[1]) and (direction_to_best[0]) >= abs(direction_to_best[2]):
                 new_directions.append([sign(direction_to_best[0]), 0, 0])
@@ -26,8 +30,10 @@ def calc(errors, fences, snakes, enemies, food, specialFood):
             else:
                 new_directions.append([0, 0, sign(direction_to_best[2])])
         else:
+            print("dead")
             new_directions.append([0, 0, 0])
     print(new_directions)
+    print("!calc")
     return new_directions
 
 def get_food_type(point, specialFood):
@@ -50,7 +56,7 @@ def main():
         food = make_food(food, specialFood)
         directions = calc(error, fences, snakes, enemies, food, specialFood)
         tickRemainMs = move(directions, snake_ids)[-1]
-        print(points)
+        print(f"points: {points}\n")
         time.sleep(tickRemainMs * 10 ** -3)
 
 
