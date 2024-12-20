@@ -23,14 +23,14 @@ def calc(errors, fences, snakes, enemies, food, specialFood):
             best_food = get_best_food(head_position, food)
             print(best_food, end=" ")
             print(math.dist(head_position, best_food))
-            direction_to_best = head_position - best_food
+            direction_to_best = best_food - head_position
             # print(direction_to_best)
             if abs(direction_to_best[0]) >= abs(direction_to_best[1]) and (direction_to_best[0]) >= abs(direction_to_best[2]):
-                new_directions.append([-int(np.sign(direction_to_best[0])), 0, 0])
+                new_directions.append([int(np.sign(direction_to_best[0])), 0, 0])
             elif abs(direction_to_best[1]) >= abs(direction_to_best[2]) and abs(direction_to_best[1]) >= abs(direction_to_best[0]):
-                new_directions.append([0, -int(np.sign(direction_to_best[1])), 0])
+                new_directions.append([0, int(np.sign(direction_to_best[1])), 0])
             else:
-                new_directions.append([0, 0, -int(np.sign(direction_to_best[2]))])
+                new_directions.append([0, 0, int(np.sign(direction_to_best[2]))])
         else:
             print("dead")
             new_directions.append([0, 0, 0])

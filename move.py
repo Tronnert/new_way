@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import datetime
 
 token = os.getenv("NEW_WAY_TOKEN")
 server_url = 'https://games-test.datsteam.dev/play/snake3d'
@@ -19,7 +20,7 @@ def move(directions, snake_ids):
         data["snakes"][e]["direction"] = directions[e]
         data["snakes"][e]["id"] = snake_ids[e]
     response = requests.post(url, headers=headers, json=data)
-    with open('example_response.json', 'w') as file:
+    with open(f'example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
         file.write(response.text)
     response = response.json()
     # print(response)
