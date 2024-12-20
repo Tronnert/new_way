@@ -10,9 +10,10 @@ def calc(error, fences, snakes, enemies, food, specialFood):
 
 def main():
     while True:
-        error, fences, snakes, enemies, food, specialFood = get_world()
+        points, error, fences, snakes, enemies, food, specialFood, _ = get_world()
         directions = calc(error, fences, snakes, enemies, food, specialFood)
         tickRemainMs = move(directions)[-1]
+        print(points)
         time.sleep(tickRemainMs * 10 ** -3)
 
 
