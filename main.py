@@ -1,6 +1,7 @@
 from move import move
 import time
 import numpy as np
+from math import abs, sign
 
 def get_world():
     return move([[0, 0, 0], [0, 0, 0], [0, 0, 0]], ["", "", ""])
@@ -18,12 +19,12 @@ def calc(errors, fences, snakes, enemies, food, specialFood):
             # print(head_position)
             direction_to_best = get_direction_to_best(head_position, food)
             # print(direction_to_best)
-            if direction_to_best[0] >= direction_to_best[1] and direction_to_best[0] >= direction_to_best[2]:
-                new_directions.append([1, 0, 0])
-            elif direction_to_best[1] >= direction_to_best[2] and direction_to_best[1] >= direction_to_best[0]:
-                new_directions.append([0, 1, 0])
+            if abs(direction_to_best[0]) >= abs(direction_to_best[1]) and (direction_to_best[0]) >= abs(direction_to_best[2]):
+                new_directions.append([sign(direction_to_best[0]), 0, 0])
+            elif abs(direction_to_best[1]) >= abs(direction_to_best[2]) and abs(direction_to_best[1]) >= abs(direction_to_best[0]):
+                new_directions.append([0, sign(direction_to_best[1]), 0])
             else:
-                new_directions.append([0, 0, 1])
+                new_directions.append([0, 0, sign(direction_to_best[2])])
         else:
             new_directions.append([0, 0, 0])
     print(new_directions)
