@@ -14,13 +14,15 @@ headers = {
 with open("post.json") as file:
     data = json.load(file)
 
-def move(directions):
+def move(directions, snake_ids):
     for e in range(3):
         data["snakes"][e]["direction"] = directions[e]
+        data["snakes"][e]["id"] = snake_ids[e]
     response = requests.post(url, headers=headers, json=data)
     with open('example_response.json', 'w') as file:
         file.write(response.text)
     response = response.json()
+    # print(response)
     return (response["points"], response["errors"], response["fences"], response["snakes"], 
      response["enemies"], response["food"], 
     response["specialFood"], response["tickRemainMs"])
