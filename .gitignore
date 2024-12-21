@@ -6,4 +6,5 @@ example*
 .gitignore
 example_response.json
 test.py
-__pycache__/move.cpython-312.pyc
+__pycache__/*
+path_visualization.html
