@@ -29,7 +29,7 @@ def update():
     camera_control()
     print("TIME TIME TIME TIME TIME TIME")
     if time() - time_last_update >= 1:  # Каждую секунду
-        create_meshes(load_objects("responses/example_response_empty.json"))
+        create_meshes(load_objects(open("responses/example_response_empty.json")))
         update_voxel_mesh("voxels.obj")  # Загружаем новый .obj файл
         time_last_update = time()
         print("MESH UPDATED")
@@ -38,7 +38,7 @@ def update():
 def main_visualise():
     global time_last_update, sky
     app = Ursina()
-    app.upd
+    print(app._update)
     sky = Sky()
     time_last_update = time()
     update_voxel_mesh("voxels.obj")  # Загружаем начальную модель

@@ -1,6 +1,6 @@
-import threading
 from main import main
-from snake_ursina import main_visualise
+import snake_ursina
+from snake_ursina import main_visualise, update
 
 # lock = threading.Lock()
 
@@ -14,6 +14,7 @@ from ursina import Ursina, Entity
 #     app.run()
 
 if __name__ == "__main__":
+    snake_ursina.update = update
     ursina_process = Process(target=main_visualise)
     response_process = Process(target=main)
     ursina_process.start()
