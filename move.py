@@ -20,7 +20,8 @@ def move(directions, snake_ids):
         data["snakes"][e]["direction"] = directions[e]
         data["snakes"][e]["id"] = snake_ids[e]
     response = requests.post(url, headers=headers, json=data)
-    with open(f'responses/example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
+    # with open(f'responses/example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
+    with open(f'example_response_{"empty"}.json', 'w') as file: # datetime.datetime.utcnow().timestamp()
         file.write(response.text)
     response = response.json()
     # print(response)
