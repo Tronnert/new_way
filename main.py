@@ -1,4 +1,5 @@
 from move import move
+from response_to_meshes import load_variables_objects, create_meshes
 import time
 import numpy as np
 import math
@@ -50,7 +51,7 @@ def get_food_type(point, specialFood):
         return "golden"
     elif point in specialFood["suspicious"]:
         return "suspicious"
-    return ""
+    return "ordinary"
 
 def make_food(food, specialFood):
     return [{"c": np.array(e["c"]), 
@@ -59,12 +60,14 @@ def make_food(food, specialFood):
 
 def main():
     while True:
-        points, error, fences, snakes, enemies, food, specialFood, _ = get_world()
+        turn, points, error, fences, snakes, enemies, food, specialFood, _ = get_world()
         snake_ids = [e["id"] for e in snakes]
         # print(snake_ids)
         food = make_food(food, specialFood)
+        create_meshes(load_variables_objects(fences, snakes, enemies, food))
         directions = calc(error, fences, snakes, enemies, food, specialFood)
         tickRemainMs = move(directions, snake_ids)[-1]
+        print(f"{turn=}")
         print(f"points: {points}\n")
         time.sleep(tickRemainMs * 10 ** -3)
 

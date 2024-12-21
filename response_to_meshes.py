@@ -4,6 +4,26 @@ import numpy as np
 import pandas as pd
 
 
+def load_variables_objects(fences, snakes, enemies, food):
+    voxels = []
+    dx = dy = dz = 0
+    for fence in fences:
+        voxels.append((fence[0] + dx, fence[1] + dy, fence[2] + dz, "#000000"))
+    for snake in snakes:
+        snake_color = "#008000" if snake["status"] == "alive" else "#006400"
+        for point in snake["geometry"]:
+            voxels.append((point[0] + dx, point[1] + dy, point[2] + dz, snake_color))
+    for snake in enemies:
+        snake_color = "#FF0000" if snake["status"] == "alive" else "#8b0000"
+        for point in snake["geometry"]:
+            voxels.append((point[0] + dx, point[1] + dy, point[2] + dz, snake_color))
+    for yummi in food:
+        yummi_color = "#964B00" if yummi["type"] == "suspicious" else "FFFF00" if \
+            yummi["type"] == "goolden" else "#FFA500"
+        voxels.append((yummi["c"][0] + dx, yummi["c"][1] + dy, yummi["c"][2] + dz, yummi_color))
+    return pd.DataFrame(voxels, columns=["x", "y", "z", "c"])
+
+
 def load_objects(response):
     objects = json.load(response)
     dx = dz = dy = 0
@@ -52,6 +72,7 @@ def create_meshes(df):
 
     # Сохраняем меш в файл
     combined_mesh.export("voxels.obj")
+    print("MESH SAVED")
 
 
 if __name__ == "__main__":
