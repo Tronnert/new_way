@@ -1,5 +1,4 @@
 from move import move
-from response_to_meshes import load_variables_objects, create_meshes
 import time
 import numpy as np
 import math
@@ -64,7 +63,7 @@ def main():
         snake_ids = [e["id"] for e in snakes]
         # print(snake_ids)
         food = make_food(food, specialFood)
-        create_meshes(load_variables_objects(fences, snakes, enemies, food))
+        # create_meshes(load_variables_objects(fences, snakes, enemies, food))
         directions = calc(error, fences, snakes, enemies, food, specialFood)
         tickRemainMs = move(directions, snake_ids)[-1]
         print(f"{turn=}")

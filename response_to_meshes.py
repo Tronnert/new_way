@@ -2,6 +2,7 @@ import json
 import trimesh
 import numpy as np
 import pandas as pd
+from main import make_food
 
 
 def load_variables_objects(fences, snakes, enemies, food):
@@ -31,6 +32,8 @@ def load_objects(response):
     snakes = objects["snakes"]
     enemies = objects["enemies"]
     food = objects["food"]
+    specialFood = objects["specialFood"]
+    food = make_food(food, specialFood)
     voxels = []
     for fence in fences:
         voxels.append((fence[0] + dx, fence[1] + dy, fence[2] + dz, "#000000"))
@@ -43,7 +46,9 @@ def load_objects(response):
         for point in snake["geometry"]:
             voxels.append((point[0] + dx, point[1] + dy, point[2] + dz, snake_color))
     for yummi in food:
-        voxels.append((yummi["c"][0] + dx, yummi["c"][1] + dy, yummi["c"][2] + dz, "#FFFF00"))
+        yummi_color = "#964B00" if yummi["type"] == "suspicious" else "FFFF00" if \
+            yummi["type"] == "goolden" else "#FFA500"
+        voxels.append((yummi["c"][0] + dx, yummi["c"][1] + dy, yummi["c"][2] + dz, yummi_color))
     return pd.DataFrame(voxels, columns=["x", "y", "z", "c"])
 
 

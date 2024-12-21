@@ -1,5 +1,7 @@
 from ursina import *
 from time import time
+from response_to_meshes import create_meshes, load_objects
+
 
 def update_voxel_mesh(file_path):
     """Обновляем модель, загружая новый .obj файл."""
@@ -25,7 +27,9 @@ def camera_control():
 def update():
     global time_last_update
     camera_control()
-    if time() - time_last_update >= 2:  # Каждую секунду
+    print("TIME TIME TIME TIME TIME TIME")
+    if time() - time_last_update >= 1:  # Каждую секунду
+        create_meshes(load_objects("responses/example_response_empty.json"))
         update_voxel_mesh("voxels.obj")  # Загружаем новый .obj файл
         time_last_update = time()
         print("MESH UPDATED")
