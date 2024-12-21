@@ -7,3 +7,4 @@ example*
 example_response.json
 test.py
 __pycache__/*
+path_visualization.html
