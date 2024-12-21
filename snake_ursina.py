@@ -38,6 +38,7 @@ def update():
 def main_visualise():
     global time_last_update, sky
     app = Ursina()
+    app.upd
     sky = Sky()
     time_last_update = time()
     update_voxel_mesh("voxels.obj")  # Загружаем начальную модель
