@@ -11,7 +11,8 @@ headers = {
     'X-Auth-Token': token,
     'Content-Type': 'application/json'
 }
-session = requests.Session(verify=True)
+session = requests.Session()
+session.verify = True
 
 with open("post.json") as file:
     data = json.load(file)
