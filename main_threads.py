@@ -14,15 +14,15 @@ from ursina import Ursina, Entity
 #     app.run()
 
 if __name__ == "__main__":
-    # ursina_process = Process(target=main_visualise)
+    ursina_process = Process(target=main_visualise)
     response_process = Process(target=main)
-    # ursina_process.start()
+    ursina_process.start()
     response_process.start()
 
     # Здесь можно выполнять другие задачи
-    # ursina_process.join()
+    ursina_process.join()
     # main_visualise()
-    # response_process.join()
+    response_process.join()
 
  
 

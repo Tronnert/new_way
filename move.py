@@ -23,7 +23,7 @@ def move(directions, snake_ids):
     
     response = session.post(url, headers=headers, json=data)
     # with open(f'responses/example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
-    with open(f'example_response_{"empty"}.json', 'w') as file: # datetime.datetime.utcnow().timestamp()
+    with open(f'responses/example_response_{"empty"}.json', 'w') as file: # datetime.datetime.utcnow().timestamp()
         file.write(response.text)
     response = response.json()
     # print(response)
