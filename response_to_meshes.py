@@ -72,6 +72,7 @@ def create_meshes(df):
 
     # Сохраняем меш в файл
     combined_mesh.export("voxels.obj")
+    print("MESH SAVED")
 
 
 if __name__ == "__main__":
