@@ -21,21 +21,23 @@ def camera_control():
     camera.y += held_keys["y"]# * 10# * time.dt
     camera.y -= held_keys["i"]# * 10# * time.dt
 
-app = Ursina()
 
-sky = Sky()
+def main_visualise():
+    app = Ursina()
 
-time_last_update = time()
+    sky = Sky()
 
-def update():
-    global time_last_update
-    camera_control()
-    if time() - time_last_update >= 2:  # Каждую секунду
-        update_voxel_mesh("voxels.obj")  # Загружаем новый .obj файл
-        time_last_update = time()
+    time_last_update = time()
 
-update_voxel_mesh("voxels.obj")  # Загружаем начальную модель
+    def update():
+        global time_last_update
+        camera_control()
+        if time() - time_last_update >= 2:  # Каждую секунду
+            update_voxel_mesh("voxels.obj")  # Загружаем новый .obj файл
+            time_last_update = time()
 
-EditorCamera()  # Для удобного управления камерой
+    update_voxel_mesh("voxels.obj")  # Загружаем начальную модель
 
-app.run()
+    EditorCamera()  # Для удобного управления камерой
+
+    app.run()
