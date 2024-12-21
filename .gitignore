@@ -1,4 +1,5 @@
 example_response.json
 test.py
-
+responses/*
 responses/example_response_empty.json
+example*
