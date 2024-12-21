@@ -11,6 +11,8 @@ headers = {
     'X-Auth-Token': token,
     'Content-Type': 'application/json'
 }
+session = requests.Session()
+session.verify = True
 
 with open("post.json") as file:
     data = json.load(file)
@@ -19,12 +21,14 @@ def move(directions, snake_ids):
     for e in range(3):
         data["snakes"][e]["direction"] = directions[e]
         data["snakes"][e]["id"] = snake_ids[e]
-    response = requests.post(url, headers=headers, json=data)
-    with open(f'example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
+    
+    response = session.post(url, headers=headers, json=data)
+    # with open(f'responses/example_response_{datetime.datetime.utcnow().timestamp()}.json', 'w') as file:
+    with open(f'responses/example_response_{"empty"}.json', 'w') as file: # datetime.datetime.utcnow().timestamp()
         file.write(response.text)
     response = response.json()
     # print(response)
-    return (response["points"], response["errors"], response["fences"], response["snakes"], 
+    return (response["turn"], response["points"], response["errors"], response["fences"], response["snakes"], 
      response["enemies"], response["food"], 
     response["specialFood"], response["tickRemainMs"])
 

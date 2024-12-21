@@ -3,3 +3,7 @@ test.py
 responses/*
 responses/example_response_empty.json
 example*
+.gitignore
+example_response.json
+test.py
+__pycache__/move.cpython-312.pyc
